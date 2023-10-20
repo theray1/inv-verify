@@ -1,3 +1,4 @@
+#A node represents a state within a Transition System
 class Node:
     labels: list[str] = []
     next_nodes = []
@@ -20,6 +21,7 @@ class Node:
         print("Has the follwing succesors: ")
         print([node.get_labels() for node in self.next_nodes])
 
+#A TransitionSystem represents a transition system, and contains the nodes of its initial states
 class TransitionSystem:
     initial_nodes: list[Node] = []
 
