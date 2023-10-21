@@ -1,4 +1,4 @@
-from TransitionSystem import Node
+from TransitionSystem import State
 
 #context_of_without is used to compute content of an array from which we remove the content of another array
 #It it used to compute the set difference of two sets represented by arrays
@@ -11,7 +11,7 @@ def content_of_without(array1: [], array2: []):
 def is_included_in(array1: [], array2: []):
     return len(content_of_without(array1, array2)) == 0
 
-def print_trace(trace: list[Node]):
+def print_trace(trace: list[State]):
     print("----------BEGIN TRACE----------")
     for n in trace:
         print(" | ")

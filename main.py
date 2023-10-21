@@ -4,32 +4,32 @@ from LogicalProposition import OrOperator
 from LogicalProposition import NotOperator
 from LogicalProposition import IdentityOperator
 from LogicalProposition import LogicalProposition
-from TransitionSystem import Node
+from TransitionSystem import State
 from util import print_trace
 from verify import verify
 
 #EXAMPLES 
 
 #1 - Concurrent processes, critical section, mutex 
-node1 = Node(["nc1", "nc2", "y=1"])
-node2 = Node(["p1", "nc2", "y=1"])
-node3 = Node(["c1", "nc2", "y=0"])
-node4 = Node(["nc1", "p2", "y=1"])
-node5 = Node(["nc1", "c2", "y=0"])
-node6 = Node(["p1", "p2", "y=1"])
-node7 = Node(["c1", "p2", "y=0"])
-node8 = Node(["p1", "c2", "y=0"])
+state1 = State(["nc1", "nc2", "y=1"])
+state2 = State(["p1", "nc2", "y=1"])
+state3 = State(["c1", "nc2", "y=0"])
+state4 = State(["nc1", "p2", "y=1"])
+state5 = State(["nc1", "c2", "y=0"])
+state6 = State(["p1", "p2", "y=1"])
+state7 = State(["c1", "p2", "y=0"])
+state8 = State(["p1", "c2", "y=0"])
 
-node1.set_next_nodes([node2, node4])
-node2.set_next_nodes([node3, node6])
-node3.set_next_nodes([node1, node7])
-node4.set_next_nodes([node5, node6])
-node5.set_next_nodes([node1, node8])
-node6.set_next_nodes([node7, node8])
-node7.set_next_nodes([node4])
-node8.set_next_nodes([node2])
+state1.set_next_states([state2, state4])
+state2.set_next_states([state3, state6])
+state3.set_next_states([state1, state7])
+state4.set_next_states([state5, state6])
+state5.set_next_states([state1, state8])
+state6.set_next_states([state7, state8])
+state7.set_next_states([state4])
+state8.set_next_states([state2])
 
-ts1 = TransitionSystem([node1])
+ts1 = TransitionSystem([state1])
 phi1 = NotOperator(
     AndOperator(
         IdentityOperator("c1"), 
@@ -39,25 +39,25 @@ phi1 = NotOperator(
 
 
 #2 Random Transition System and Invariant
-node9 = Node(["d", "b", "w"])
-node10 = Node(["d", "e", "w"])
-node11 = Node(["q", "j", "i"])
-node12 = Node(["j", "k", "d"])
-node13 = Node(["w", "a", "d"])
-node14 = Node(["p", "q", "r"])
-node15 = Node(["j", "t", "u"])
-node16 = Node(["v", "w", "d"])
+state9 = State(["d", "b", "w"])
+state10 = State(["d", "e", "w"])
+state11 = State(["q", "j", "i"])
+state12 = State(["j", "k", "d"])
+state13 = State(["w", "a", "d"])
+state14 = State(["p", "q", "r"])
+state15 = State(["j", "t", "u"])
+state16 = State(["v", "w", "d"])
 
-node9.set_next_nodes([node9, node14])
-node10.set_next_nodes([node16, node12])
-node11.set_next_nodes([node13, node9])
-node12.set_next_nodes([node14, node6])
-node13.set_next_nodes([node12, node10])
-node14.set_next_nodes([node16, node14])
-node15.set_next_nodes([node11])
-node16.set_next_nodes([node15, node10])
+state9.set_next_states([state9, state14])
+state10.set_next_states([state16, state12])
+state11.set_next_states([state13, state9])
+state12.set_next_states([state14, state6])
+state13.set_next_states([state12, state10])
+state14.set_next_states([state16, state14])
+state15.set_next_states([state11])
+state16.set_next_states([state15, state10])
 
-ts2 = TransitionSystem([node9, node16])
+ts2 = TransitionSystem([state9, state16])
 phi2 = OrOperator(
     AndOperator(
         NotOperator(

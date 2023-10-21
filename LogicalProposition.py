@@ -6,7 +6,7 @@ class LogicalProposition:
     #Every string in label_list is to be interpreted as having its value set to True
     #For example : evaluating a logical proposition phi ((not a and b) or (c and d)) with label_list ["a", "b", "d"]
     #is equivalent to computing ((not True and True) or (False and true))
-    #That is because a, b and d are all contained in label_list, and thus are treated as False
+    #That is because a, b and d are all contained in label_list, and thus are treated as True
     #and c is not in label_list, and as such is implicitely treated as False
     def evaluate(self, label_list: list[str]):
         pass

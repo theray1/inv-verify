@@ -1,18 +1,18 @@
 from TransitionSystem import TransitionSystem
 from LogicalProposition import LogicalProposition
-from TransitionSystem import Node
+from TransitionSystem import State
 from util import is_included_in
 from util import content_of_without
 
-def verify(ts: TransitionSystem, phi: LogicalProposition) -> tuple[bool, list[Node]]:
-    stack_U: list[Node] = []
-    set_R: list[Node] = []
+def verify(ts: TransitionSystem, phi: LogicalProposition) -> tuple[bool, list[State]]:
+    stack_U: list[State] = []
+    set_R: list[State] = []
     flag_bool = True
-    i = ts.get_initial_nodes()
+    i = ts.get_initial_states()
 
-    def visit(node: Node, phi: LogicalProposition):
-        stack_U.append(node)
-        set_R.append(node)
+    def visit(state: State, phi: LogicalProposition):
+        stack_U.append(state)
+        set_R.append(state)
 
         #equivalent of the "Répéter - Jusqu'à" loop
 
@@ -36,7 +36,7 @@ def verify(ts: TransitionSystem, phi: LogicalProposition) -> tuple[bool, list[No
     def explore(phi: LogicalProposition):
         nonlocal flag_bool #not sure why this is needed, but not using it causes "UnboudnLocalError: local variable 'flag_bool' reference before assignement"
         s_1 = stack_U[len(stack_U)-1]
-        succesors = s_1.get_next_nodes()
+        succesors = s_1.get_next_states()
         if(is_included_in(succesors, set_R)):
             stack_U.pop()
             flag_bool = flag_bool and phi.evaluate(s_1.get_labels())
