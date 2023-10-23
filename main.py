@@ -62,7 +62,7 @@ phi2 = OrOperator(
     AndOperator(
         NotOperator(
             IdentityOperator("w")),
-            IdentityOperator("j")), 
+        IdentityOperator("j")), 
     AndOperator(
         OrOperator(
             IdentityOperator("a"), 
