@@ -1,6 +1,6 @@
 from TransitionSystem import State
 
-#context_of_without is used to compute content of an array from which we remove the content of another array
+#content_of_without is used to compute content of an array from which we remove the content of another array
 #It it used to compute the set difference of two sets represented by arrays
 def content_of_without(array1: [], array2: []):
     res = [i for i in array1 if i not in array2]
